@@ -1,7 +1,9 @@
-const AdminDashboard = () => {
-  return (
-    <div>AdminDashboard</div>
-  )
-}
+import { useAuth } from "../context/authContext.jsx";
 
-export default AdminDashboard
+const AdminDashboard = () => {
+  const { user,loading } = useAuth();
+ 
+  return <div>AdminDashboard {user && user.name}</div>;
+};
+
+export default AdminDashboard;

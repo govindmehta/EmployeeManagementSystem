@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authContext.jsx";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -8,22 +9,30 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:3000/api/auth/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
 
       console.log("Login successful:", response.data);
-      
+      console.log(response.data.user);
+      login(response.data.user);
       localStorage.setItem("authToken", response.data.token);
-
-      navigate("/admin-dashboard");
+      if (response.data.user.role === "admin") {
+        navigate("/admin-dashboard");
+      } else {
+        navigate("/employee-dashboard");
+      }
     } catch (err) {
       console.error("Login error:", err.response?.data || err.message);
       setError(err.response?.data?.msg || "Login failed. Please try again.");
@@ -41,7 +50,9 @@ const Login = () => {
         onSubmit={handleSubmit}
         className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md"
       >
-        <h2 className="text-3xl font-bold mb-6 text-white text-center">Login</h2>
+        <h2 className="text-3xl font-bold mb-6 text-white text-center">
+          Login
+        </h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-300 mb-2">
