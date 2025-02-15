@@ -11,7 +11,7 @@ import {
 
 const AdminSidebar = () => {
   return (
-    <div className="h-full min-h-screen w-72 bg-gray-900 text-white flex flex-col">
+    <div className="min-h-screen w-72 bg-gray-900 text-white flex flex-col overflow-y-auto">
       <div className="px-8 py-6 border-b border-gray-700">
         <h1 className="text-4xl font-extrabold tracking-wide">Employee MS</h1>
       </div>
@@ -19,6 +19,7 @@ const AdminSidebar = () => {
       <nav className="flex flex-col mt-8 space-y-4 px-4">
         <NavLink
           to="/admin-dashboard"
+          end
           className={({ isActive }) =>
             `flex items-center px-4 py-3 rounded-md transition-colors duration-200 ${
               isActive ? "bg-blue-600" : "hover:bg-gray-700"

@@ -7,11 +7,11 @@ const userRegister = async () => {
     try {
         const hashedPassword = await bcrypt.hash("admin",10);
         const newUser = await prisma.user.create({
-            data: {  // Ensure to use 'data' property when creating a new record
+            data: {  
               name: "admin",
               email: "admin@gmail.com",
               password: hashedPassword,
-              role: "admin", // This must match one of the enum values defined in your Prisma schema.
+              role: "admin", 
             },
           });
         console.log(newUser)
