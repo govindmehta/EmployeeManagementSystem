@@ -4,19 +4,32 @@ const prisma = new PrismaClient();
 export const addDepartment = async (req, res) => {
   try {
     const { dep_name, description } = req.body;
+
+    const existingDepartment = await prisma.department.findUnique({
+      where: { dep_name },
+    });
+
+    if (existingDepartment) {
+      return res.status(400).json({
+        success: false,
+        message: "Department already exists.",
+      });
+    }
+
     const department = await prisma.department.create({
       data: {
         dep_name,
         description,
       },
     });
-    console.log(department);
+
     res.status(201).json({ success: true, data: department });
   } catch (error) {
     console.error("Add Department Server Error:", error.message);
     res.status(500).json({ success: false, message: "Add Department Server Error" });
   }
-}
+};
+
 
 export const getDepartments = async (req, res) => {
   try {

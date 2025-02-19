@@ -1,24 +1,14 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
-
-// datasource db {
-//   provider = "mongodb"
-//   url      = "mongodb+srv://govind:govind@cluster0.2s8xo.mongodb.net/EmployeeSystem"
-// }
-
 
 datasource db {
   provider = "postgresql"
   url      = "postgresql://neondb_owner:npg_NsM2LH9ETPim@ep-blue-smoke-a88o7e3w-pooler.eastus2.azure.neon.tech/neondb?sslmode=require"
 }
-
 
 model User {
   id           Int      @id @default(autoincrement())
@@ -36,11 +26,24 @@ enum Role {
   employee
 }
 
-
 model Department {
-  id        Int      @id @default(autoincrement())
-  dep_name      String
+  id          Int      @id @default(autoincrement())
+  dep_name    String   @unique  
   description String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  employees   Employee[]
+}
+
+model Employee {
+  id           Int        @id @default(autoincrement())
+  emp_name     String
+  email        String     @unique
+  phone        String?
+  address      String?
+  profilePic String?    // New field for employee profile picture (optional)
+  departmentId Int
+  department   Department @relation(fields: [departmentId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }

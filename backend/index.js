@@ -8,6 +8,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use('/static', express.static('static'));
 
 app.use("/api", mainRouter);
 
