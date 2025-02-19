@@ -77,3 +77,44 @@ export const deleteEmployee = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
+
+export const updateEmployee = async (req, res) => {
+  const { id } = req.params;
+  const { emp_name, email, phone, address, departmentName } = req.body;
+  const profilePic = req.file ? req.file.path : undefined;
+
+  try {
+    const department = await prisma.department.findUnique({
+      where: { dep_name: departmentName },
+    });
+
+    if (!department) {
+      return res.status(404).json({
+        success: false,
+        error: "Department not found.",
+      });
+    }
+
+    const updateData = {
+      emp_name,
+      email,
+      phone,
+      address,
+      departmentId: department.id,
+    };
+
+    if (profilePic !== undefined) {
+      updateData.profilePic = profilePic;
+    }
+
+    const employee = await prisma.employee.update({
+      where: { id: parseInt(id, 10) },
+      data: updateData,
+    });
+
+    res.json({ success: true, employee });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};

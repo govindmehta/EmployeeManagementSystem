@@ -11,6 +11,11 @@ import EditDepartment from "./components/department/EditDepartment.jsx";
 import EmployeeList from "./components/employee/EmployeeList.jsx";
 import AddEmployee from "./components/employee/AddEmployee.jsx";
 import EmployeeDetails from "./components/employee/EmployeeDetails.jsx";
+import EditEmployee from "./components/employee/EditEmployee.jsx";
+import LeaveList from "./components/leave/LeaveList.jsx";
+import SalaryComponent from "./components/salary/SalaryComponent.jsx";
+import AddSalary from "./components/salary/AddSalary.jsx";
+import UpdateSalary from "./components/salary/UpdateSalary.jsx";
 
 function App() {
   return (
@@ -36,6 +41,11 @@ function App() {
           <Route path="/admin-dashboard/employees" element={<EmployeeList/>}></Route>
           <Route path="/admin-dashboard/add-employee" element={<AddEmployee/>}></Route>
           <Route path="/admin-dashboard/employee-details/:id" element={<EmployeeDetails/>}></Route>
+          <Route path="/admin-dashboard/edit-employee/:id" element={<EditEmployee/>}></Route>
+          <Route path="/admin-dashboard/leave" element={<LeaveList/>}></Route>
+          <Route path="/admin-dashboard/salary" element={<SalaryComponent/>}></Route>
+          <Route path="/admin-dashboard/add-salary" element={<AddSalary/>}></Route>
+          <Route path="/admin-dashboard/edit-salary/:id" element={<UpdateSalary/>}></Route>
 
           
         </Route>

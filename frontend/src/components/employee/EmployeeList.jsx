@@ -62,7 +62,6 @@ const EmployeeList = () => {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
         });
-        console.log(response.data);
         if (response.data.success) {
           let sno = 1;
           const data = response.data.employees.map((employee) => ({

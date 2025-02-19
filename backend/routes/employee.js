@@ -1,5 +1,5 @@
 import express from "express"
-import { addEmployee, deleteEmployee, getEmployeeInfo, getEmployees } from "../controllers/employeeController.js"
+import { addEmployee, deleteEmployee, getEmployeeInfo, getEmployees, updateEmployee } from "../controllers/employeeController.js"
 import multer from "multer";
 
 const storage = multer.diskStorage({
@@ -18,5 +18,7 @@ router.get("/", getEmployees)
 router.post("/add",upload.single("profilePic"),addEmployee);
 router.delete("/:id",deleteEmployee);
 router.get("/:id",getEmployeeInfo);
+router.put("/:id", upload.single("profilePic"), updateEmployee);
+
 
 export default router;
