@@ -73,7 +73,12 @@ npm install
 
 3. Set up environment variables:
    - Create a `.env` file in the backend directory
-   - Add your database connection string and other required variables
+   - Add the following variables:
+     ```
+     DATABASE_URL="your_postgresql_connection_string"
+     JWT_SECRET="your_secret_key"
+     PORT=3000
+     ```
 
 4. Set up the database:
 ```bash
