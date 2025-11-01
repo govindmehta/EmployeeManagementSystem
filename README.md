@@ -11,7 +11,13 @@ A full-stack Employee Management System built with modern web technologies.
 - **ESLint** - Code linting and quality
 
 ### Backend
-- Backend implementation details
+- **Node.js** - JavaScript runtime environment
+- **Express** - Web application framework
+- **Prisma** - Modern ORM for database management
+- **PostgreSQL** - Relational database (Neon)
+- **JWT** - Authentication and authorization
+- **bcryptjs** - Password hashing
+- **Multer** - File upload handling
 
 ## 📁 Project Structure
 
@@ -29,6 +35,7 @@ EmployeeManagementSystem/
 ### Prerequisites
 - Node.js (v14 or higher)
 - npm or yarn
+- PostgreSQL database (or use a cloud provider like Neon)
 
 ### Frontend Setup
 
@@ -54,10 +61,37 @@ npm run build
 
 ### Backend Setup
 
+1. Navigate to the backend directory:
 ```bash
 cd backend
-# Add specific backend setup instructions
 ```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables:
+   - Create a `.env` file in the backend directory
+   - Add your database connection string and other required variables
+
+4. Set up the database:
+```bash
+npx prisma generate
+npx prisma migrate dev
+```
+
+5. (Optional) Seed the database:
+```bash
+node userSeed.js
+```
+
+6. Start the development server:
+```bash
+npm start
+```
+
+The backend server will run on port 3000 by default.
 
 ## 📝 Features
 
